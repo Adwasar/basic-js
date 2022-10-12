@@ -15,9 +15,17 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 
+//  module.exports = {
+//   countCats
+// };
+
+
+
+const a = [[0, 1, '^^', 2, '^^'], [ 1, '^^']];
+
+let count = 0;
+
 function countCats(matrix) {
-  let count = 0;
-  
   matrix.forEach(item => {
     if (typeof item == 'object') {
       item.forEach(item => {
@@ -27,11 +35,15 @@ function countCats(matrix) {
       });
     }
   });
-
-  return count;
 }
 
+countCats(a); 
 
-module.exports = {
-  countCats
-};
+console.log(count);
+
+
+// console.log(a);
+
+
+
+
