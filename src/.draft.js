@@ -1,49 +1,44 @@
 const { NotImplementedError } = require('../extensions/index.js');
 
+const MODERN_ACTIVITY = 15;
+const HALF_LIFE_PERIOD = 5730;
+
 /**
- * Given matrix where you have to find cats by ears "^^"
- *
- * @param {Array<Array>} matrix 
- * @return {Number} count of cats found
+ * Determine the age of archeological find by using
+ * given MODERN_ACTIVITY and HALF_LIFE_PERIOD values
+ * 
+ * @param {String} sampleActivity string representation of current activity 
+ * @return {Number | Boolean} calculated age in years or false
+ * in case of incorrect sampleActivity
  *
  * @example
- * countCats([
- *  [0, 1, '^^'],
- *  [0, '^^', 2],
- *  ['^^', 1, 2]
- * ]) => 3`
+ * 
+ * dateSample('1') => 22387
+ * dateSample('WOOT!') => false
  *
  */
 
-//  module.exports = {
-//   countCats
-// };
+// MODERN_ACTIVITY - активность современного изотопа 
+// HALF_LIFE_PERIOD - период полураспада 
+// sampleActivity - активность найденного изотопа  
 
 
-
-const a = [[0, 1, '^^', 2, '^^'], [ 1, '^^']];
-
-let count = 0;
-
-function countCats(matrix) {
-  matrix.forEach(item => {
-    if (typeof item == 'object') {
-      item.forEach(item => {
-        if (item == '^^') {
-          count += 1;
-        }
-      });
-    }
-  });
+function dateSample(sampleActivity) {
+  if (+sampleActivity == NaN) {
+    return false;
+  } else {
+    let k = 0.693 / HALF_LIFE_PERIOD; 
+    let age = (Math.log(MODERN_ACTIVITY / sampleActivity) / k);
+    return Math.ceil(age);
+  }
 }
 
-countCats(a); 
-
-console.log(count);
-
-
-// console.log(a);
+let a = dateSample(1);
+console.log(a);
 
 
+module.exports = {
+  dateSample
+};
 
 
