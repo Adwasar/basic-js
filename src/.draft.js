@@ -1,44 +1,49 @@
-const { NotImplementedError } = require('../extensions/index.js');
-
-const MODERN_ACTIVITY = 15;
-const HALF_LIFE_PERIOD = 5730;
+// const { NotImplementedError } = require('../extensions/index.js');
 
 /**
- * Determine the age of archeological find by using
- * given MODERN_ACTIVITY and HALF_LIFE_PERIOD values
- * 
- * @param {String} sampleActivity string representation of current activity 
- * @return {Number | Boolean} calculated age in years or false
- * in case of incorrect sampleActivity
+ * Create name of dream team based on the names of its members
+ *  
+ * @param {Array} members names of the members 
+ * @return {String | Boolean} name of the team or false
+ * in case of incorrect members
  *
  * @example
  * 
- * dateSample('1') => 22387
- * dateSample('WOOT!') => false
+ * createDreamTeam(['Matt', 'Ann', 'Dmitry', 'Max']) => 'ADMM'
+ * createDreamTeam(['Olivia', 1111, 'Lily', 'Oscar', true, null]) => 'LOO'
  *
  */
 
-// MODERN_ACTIVITY - активность современного изотопа 
-// HALF_LIFE_PERIOD - период полураспада 
-// sampleActivity - активность найденного изотопа  
+const newDreamTeam = ['Matt', 'Ann', 'Dmitry', 'Max'];
+const newDreamTeam2 = ['Olivia', 1111, '        Lily'   , 'Oscar', true, null];
+const newDreamTeam3 = [NaN, 1111, undefined, true, null];
 
-
-function dateSample(sampleActivity) {
-  if (+sampleActivity == NaN) {
-    return false;
+function createDreamTeam(members) {
+  if (Array.isArray(members)) {
+    let firstLettersStr = [];
+  
+    members.forEach(item => {
+      if (typeof item === 'string') {
+        firstLettersStr += item.trim().slice(0, 1).toUpperCase();
+      } 
+    });
+  
+    if (typeof firstLettersStr === 'string') {
+      let newName = firstLettersStr.split('').sort().join('');
+      return newName;
+    } else {
+      return false;
+    }
   } else {
-    let k = 0.693 / HALF_LIFE_PERIOD; 
-    let age = (Math.log(MODERN_ACTIVITY / sampleActivity) / k);
-    return Math.ceil(age);
+    return false;
   }
 }
 
-let a = dateSample(1);
-console.log(a);
 
 
-module.exports = {
-  dateSample
-};
+console.log(createDreamTeam(12));
 
 
+// module.exports = {
+//   createDreamTeam
+// };
