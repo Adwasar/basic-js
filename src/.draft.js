@@ -1,49 +1,27 @@
-// const { NotImplementedError } = require('../extensions/index.js');
+let myDate1 = new Date(655, 0, 1, 4, 56, 39, 676); // winter
+let myDate2 = new Date(866, 2, 10, 12, 53, 10, 825); // spring
+let myDate3 = new Date(2455, 5, 24, 5, 17, 19, 809); // summer
+let myDate4 = new Date(83, 9, 25, 16, 20, 23, 544); // fall
 
-/**
- * Create name of dream team based on the names of its members
- *  
- * @param {Array} members names of the members 
- * @return {String | Boolean} name of the team or false
- * in case of incorrect members
- *
- * @example
- * 
- * createDreamTeam(['Matt', 'Ann', 'Dmitry', 'Max']) => 'ADMM'
- * createDreamTeam(['Olivia', 1111, 'Lily', 'Oscar', true, null]) => 'LOO'
- *
- */
 
-const newDreamTeam = ['Matt', 'Ann', 'Dmitry', 'Max'];
-const newDreamTeam2 = ['Olivia', 1111, '        Lily'   , 'Oscar', true, null];
-const newDreamTeam3 = [NaN, 1111, undefined, true, null];
-
-function createDreamTeam(members) {
-  if (Array.isArray(members)) {
-    let firstLettersStr = [];
-  
-    members.forEach(item => {
-      if (typeof item === 'string') {
-        firstLettersStr += item.trim().slice(0, 1).toUpperCase();
-      } 
-    });
-  
-    if (typeof firstLettersStr === 'string') {
-      let newName = firstLettersStr.split('').sort().join('');
-      return newName;
-    } else {
-      return false;
-    }
+function getSeason(date) {
+  if (Object.prototype.toString.call(date) !== '[object Date]') {
+    return 'Unable to determine the time of year!';
   } else {
-    return false;
+    let month = date.getMonth();
+    if (month == 11 || month == 0 || month == 1 ) {
+      return 'winter';
+    } else if (month >= 2 && month < 5) {
+      return 'spring';
+    } else if (month >= 5 && month < 8) {
+      return 'summer';
+    } else if (month >=8 && month < 11) {
+      return 'fall';
+    } else {
+      return 'Invalid date!';
+    }
   }
 }
 
-
-
-console.log(createDreamTeam(12));
-
-
-// module.exports = {
-//   createDreamTeam
-// };
+let a = getSeason('foo');
+console.log(a);
