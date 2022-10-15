@@ -1,31 +1,47 @@
-let s1 = "aabccпппцыы";
-let s2 = "adcaaрррцыы";
 
-function getCommonCharacterCount(s1, s2) {
-  let letters1 = s1.split('');
-  let letters2 = s2.split('');
-  let count = 0; 
+/**
+ * For n = 152, the output should be 52
+ */
+let num = 109;
 
-  for (let i = 0; i < letters1.length; i++) {
-    for (let j = 0; j < letters2.length; j++) {
-      if (letters2[j] === letters1[i]) {
-        letters2.splice(j, 1);
-        count++;
-        break;
-      }
-    }
+function deleteDigit(n) {
+  let lengthOfNum = String(n).length;
+  let arrN = String(n).split('');
+  let allNumbs = [];
+
+
+  for (let i = 0; i < lengthOfNum; i++) {
+    allNumbs.push(Number(new Array().concat(arrN.slice(0,i),arrN.slice(i+1)).join('')));
   }
+  
+  let maxNum = +(allNumbs.sort().splice(-1, 1));
 
-  // letters1.forEach(item => {
-  //   let indx = letters2.indexOf(item);   
-
-  //   if (indx >= 0) {
-  //     letters2.splice(indx, 1);
-  //     count++;
-  //   }
-
-  // });
-  return count;
+  console.log(maxNum);
 }
+console.log(deleteDigit(num));
 
-console.log(getCommonCharacterCount(s1, s2));
+
+
+
+// function deleteDigit(n) {
+//   let withoutMinNum = [];
+//   let minNum = String(n).split('').sort().slice(0, 1);
+//   let numArr = String(n).split('');
+
+//   numArr.forEach(item => {
+//     withoutMinNum.push(item);
+//   });
+
+//   for (let i = 0; i < withoutMinNum.length; i++) {
+//     if (numArr[i] == minNum) {
+//       withoutMinNum.splice(i, 1); 
+//       break;
+//     }
+//   }
+ 
+  
+//   return +(withoutMinNum.join(''));
+// }
+// console.log(deleteDigit(num));
+
+
