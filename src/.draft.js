@@ -1,22 +1,31 @@
-let arr1 = ([1, [2, 3, 3,[1,[1, 3, 4, 5, [1, [[]], 5,]]],], 3, 4, 4]); // => 1
-// depthCalc.calculateDepth([1, 2, 3, [4, 5]]); // => 2
-// depthCalc.calculateDepth([[[]]]); // => 3
+let s1 = "aabccпппцыы";
+let s2 = "adcaaрррцыы";
 
-class DepthCalculator {
-  calculateDepth(arr) {
-    let count = 1;
+function getCommonCharacterCount(s1, s2) {
+  let letters1 = s1.split('');
+  let letters2 = s2.split('');
+  let count = 0; 
 
-    for (let i = 0; i < arr.length; i++) {
-      if (Array.isArray(arr[i])) {
-          console.log(count);
-          arr = arr.flat();
-          return (count += this.calculateDepth(arr));
-        }
+  for (let i = 0; i < letters1.length; i++) {
+    for (let j = 0; j < letters2.length; j++) {
+      if (letters2[j] === letters1[i]) {
+        letters2.splice(j, 1);
+        count++;
+        break;
       }
-    
-    return count;
+    }
   }
+
+  // letters1.forEach(item => {
+  //   let indx = letters2.indexOf(item);   
+
+  //   if (indx >= 0) {
+  //     letters2.splice(indx, 1);
+  //     count++;
+  //   }
+
+  // });
+  return count;
 }
 
-let a = new DepthCalculator();
-console.log(a.calculateDepth(arr1));
+console.log(getCommonCharacterCount(s1, s2));
