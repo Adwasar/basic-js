@@ -6,16 +6,13 @@ class DepthCalculator {
   calculateDepth(arr) {
     let count = 1;
 
-    function recursiveFoo(arr) {
-      console.log(count);
-      arr.forEach(item => { 
-        if (Array.isArray(item)) {
-          count++;  
-          recursiveFoo(item);
+    for (let i = 0; i < arr.length; i++) {
+      if (Array.isArray(arr[i])) {
+          console.log(count);
+          arr = arr.flat();
+          return (count += this.calculateDepth(arr));
         }
-      });
-    }
-    recursiveFoo(arr);
+      }
     
     return count;
   }
