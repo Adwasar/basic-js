@@ -1,4 +1,11 @@
-let myDate = new Date(655, 0, 1, 4, 56, 39, 676);
-let a = 1;
+let myArr = [1, 2, 4, 5];
+// myArr.splice(2);
+// console.log(myArr);
 
-console.log(Object.prototype.toString.call(myDate) === '[object Date]');
+
+function deleteElem(arr, index) {
+  arr.splice(index, 1);
+}
+deleteElem(myArr, 2);
+
+console.log(myArr);
