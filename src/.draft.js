@@ -1,40 +1,25 @@
+let arr1 = ([1, [2, 3, 3,[1,[1, 3, 4, 5, [1, [[]], 5,]]],], 3, 4, 4]); // => 1
+// depthCalc.calculateDepth([1, 2, 3, [4, 5]]); // => 2
+// depthCalc.calculateDepth([[[]]]); // => 3
 
-const chainMaker = {
-  arr: [],
+class DepthCalculator {
+  calculateDepth(arr) {
+    let count = 1;
 
-  addLink(value) {
-    chainMaker.arr.push(`${value}`);
-    return chainMaker;
-  },
-
-  getLength() {
-    return chainMaker.arr.length;
-  },
-  
-  removeLink(position) { 
-    if (Number.isNaN(Number(position)) || !chainMaker.arr[position - 1]) {
-      chainMaker.arr = [];
-      throw new Error("You can't remove incorrect link!");
+    function recursiveFoo(arr) {
+      console.log(count);
+      arr.forEach(item => { 
+        if (Array.isArray(item)) {
+          count++;  
+          recursiveFoo(item);
+        }
+      });
     }
-
-    chainMaker.arr.splice(position - 1, 1);
-    return chainMaker;
-  },
-
-  reverseChain() {
-    chainMaker.arr.reverse();
-    return chainMaker;
-  },
-
-  finishChain() {
-    let result = `'( ${chainMaker.arr.join(" )~~( ")} )'`;
-
-    chainMaker.arr = [];
-
-    return result;
+    recursiveFoo(arr);
+    
+    return count;
   }
+}
 
-};
-
-
-
+let a = new DepthCalculator();
+console.log(a.calculateDepth(arr1));
